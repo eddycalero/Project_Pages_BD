@@ -1,0 +1,63 @@
+CREATE DATABASE YellowPages
+GO
+
+USE YellowPages
+GO
+
+CREATE SCHEMA Empresa
+GO
+
+CREATE SCHEMA Person
+GO
+
+
+CREATE TABLE Empresa.DepartamentoEmpresa
+(
+	DepartamentoEmpresaID UNIQUEIDENTIFIER PRIMARY KEY,
+	[Name] VARCHAR (40) NOT NULL,
+	SucursalName VARCHAR(40) NOT NULL,
+)
+GO
+
+CREATE TABLE Empresa.Municipio
+(
+	MunicipioID UNIQUEIDENTIFIER PRIMARY KEY,
+	DepartamentoEmpresaID UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Empresa.DepartamentoEmpresa(DepartamentoEmpresaID),
+	[Name] VARCHAR(40) NOT NULL,
+	IsActive BIT DEFAULT (1)
+)
+GO
+
+CREATE TABLE Empresa.Empresa
+(
+	EmpresaID UNIQUEIDENTIFIER PRIMARY KEY,
+	MunicipioID UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Empresa.Municipio(MunicipioID),
+	[Name] VARCHAR(40) NOT NULL,
+	[Description] VARCHAR(80) NOT NULL,
+	Images1 VARBINARY(MAX) NOT NULL,
+	DateCreate DATETIME DEFAULT(GETDATE()) NOT NULL,
+	IsActive BIT DEFAULT(1),
+	DireccionWeb VARCHAR(40) NOT NULL,
+	DescripcionTwo VARCHAR(100) NOT NULL,
+	ImagenTwo VARBINARY(MAX) NOT NULL,
+	Direccion VARCHAR(80) NOT NULL
+)
+GO
+
+CREATE TABLE Empresa.OfertaEmpresa
+(
+	OfertaEmpresaID UNIQUEIDENTIFIER PRIMARY KEY,
+	EmpresaID UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Empresa.Empresa(EmpresaID),
+	NombreOferta VARCHAR (40) NOT NULL,
+	IsActive BIT DEFAULT (1)
+)
+GO
+
+CREATE TABLE Empresa.ContactoEmpresa
+(
+	ContactoID UNIQUEIDENTIFIER PRIMARY KEY,
+	EmpresaID UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Empresa.Empresa(EmpresaID),
+	ContactoName VARCHAR (40) NOT NULL,
+	IsActive BIT DEFAULT(1)
+)
+GO
