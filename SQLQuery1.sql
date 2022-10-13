@@ -65,7 +65,6 @@ CREATE TABLE Empresa.DepartamentoEmpresa
 (
 	DepartamentoEmpresaID UNIQUEIDENTIFIER PRIMARY KEY,
 	[Name] VARCHAR (40) NOT NULL,
-	SucursalName VARCHAR(40) NOT NULL,
 	IsActive BIT DEFAULT(1)
 )
 GO
