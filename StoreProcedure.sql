@@ -83,7 +83,7 @@ INNER JOIN Empresa.Municipio AS x
 ON d.DepartamentoEmpresaID = x.DepartamentoEmpresaID
 INNER JOIN Empresa.Empresa AS r
 ON x.MunicipioID = r.MunicipioID
-WHERE x.IsActive = 1
+WHERE r.IsActive = 1
 END 
 GO
 select * from Empresa.Empresa
@@ -203,5 +203,11 @@ EXEC US_Empresa_Insert 'samsung','Empresa de prueba',@D,'direccion web',
 'oferta1','oferta2','6C877944-733E-4801-B311-E800ACBF08AA'
 GO
 
+DELETE  FROM Empresa.Empresa 
 
+DELETE FROM Empresa.ContactoEmpresa
+
+DELETE FROM Empresa.OfertaEmpresa
+
+SELECT * FROM Empresa.Empresa
 
